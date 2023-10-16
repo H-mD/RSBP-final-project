@@ -6,15 +6,11 @@ import time
 import csv
 import re
 import uuid
-from Bio import SeqIO, SeqFeature
+from Bio import SeqIO
 from Bio.SeqRecord import SeqRecord
-from Bio.Seq import Seq
-from Bio.SeqFeature import FeatureLocation
 from collections import defaultdict
-from decimal import Decimal
 
 app = Flask(__name__)
-genome_file = "./test_data/sequence.gb"
 
 class CGViewBuilder:
     VERSION = '1.1.0'
