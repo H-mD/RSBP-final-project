@@ -13,8 +13,18 @@ pip install biopython
 pip install flask
 ```
 
-## How to Run
+## How to Use
+
+### Run the app
 ```
 python app.py
 ```
-> Access visualize data via localhost:5000
+
+### Access the app from browser
+```
+localhost:5000
+```
+
+### Upload genome dataset file
+*Curently only accepting .gb file*
+
