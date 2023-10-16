@@ -1,5 +1,5 @@
 # from Bio import SeqIO
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect, url_for
 import json
 import os
 import time
@@ -353,16 +353,31 @@ def loadjson(file_path):
         data = json.load(json_file)
     return data
 
-@app.route("/")
+@app.route('/')
 def index():
+    return render_template('index.html')
+
+@app.route("/uploads/<dataset>", methods=['GET', 'POST'])
+def result(dataset):
     cgview_options = {
         'config': None,
         'map_id': int.from_bytes(os.urandom(4), byteorder="big"),
         'map_name': "coba",
         'contigs': None,
     }
-    data = CGViewBuilder(genome_file, options=cgview_options)
-    return render_template("index.html", data=data.to_json())
+    data = CGViewBuilder("templates/uploads/" + dataset, options=cgview_options)
+    return render_template("result.html", data=data.to_json())
+
+@app.route("/upload", methods=['GET', 'POST'])
+def upload():
+    uploaded_file = request.files['file']
+    if uploaded_file:
+        file_path = 'templates/uploads/' + uploaded_file.filename
+        uploaded_file.save(file_path)
+        return redirect(url_for('result', dataset=uploaded_file.filename))
+    else:
+        return "No file uploaded."
+            
 
 if __name__ == "__main__":
     app.run(debug=True)
