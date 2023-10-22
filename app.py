@@ -25,7 +25,9 @@ class CGViewBuilder:
         self.plots = []
         self.tracks = []
         self.blast_tracks = []
-        self.config = self.read_config(options.get('config')) if options.get('config') else {}
+        self.config = {}
+        if options.get('config'):
+            self.read_config(options.get('config')) 
         self.common_genetic_code = None
         self.read_sequence(sequence_path)
         self.build_genetic_code()
@@ -397,7 +399,8 @@ def upload():
     config_file = request.files.get('config')
     config_name = None
     config_path = None
-    if config_file is not None:
+
+    if config_file:
         config_name = fixname(config_file.filename)
         config_path = 'templates/uploads/' + config_name
         config_file.save(config_path)
