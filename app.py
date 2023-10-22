@@ -1,6 +1,7 @@
 # from Bio import SeqIO
 from flask import Flask, render_template, request, redirect, url_for
 import json
+import yaml
 import os
 import time
 import csv
@@ -24,11 +25,11 @@ class CGViewBuilder:
         self.plots = []
         self.tracks = []
         self.blast_tracks = []
-        self.debug = False
-        self.config = {}
-        self.read_sequence(sequence_path)
-        # self.build_genetic_code()
+        self.config = self.read_config(options.get('config')) if options.get('config') else {}
         self.common_genetic_code = None
+        self.read_sequence(sequence_path)
+        self.build_genetic_code()
+        # self.common_genetic_code = None
         if options.get('analysis_path'):
             self.read_gff_analysis(options['analysis_path'])
         if options.get('blasts'):
@@ -56,6 +57,29 @@ class CGViewBuilder:
             'features': [],
             'tracks': []
         }
+    
+    def read_config(self, path):
+        with open(path, 'r') as file:
+            config = yaml.safe_load(file)
+            config = config['cgview']
+            if 'settings' in config:
+                self.cgview['settings'] = config['settings']
+            if 'backbone' in config:
+                self.cgview['backbone'] = config['backbone']
+            if 'ruler' in config:
+                self.cgview['ruler'] = config['ruler']
+            if 'dividers' in config:
+                self.cgview['dividers'] = config['dividers']
+            if 'annotation' in config:
+                self.cgview['annotation'] = config['annotation']
+            if 'sequence' in config:
+                self.cgview['sequence'] = config['sequence']
+            if 'legend' in config:
+                self.cgview['legend'] = config['legend']
+            if 'tracks' in config:
+                self.cgview['tracks'] = config['tracks']
+
+        return config
 
     def read_sequence(self, path):
         self.seq_type = self.detect_filetype(path)
@@ -286,21 +310,17 @@ class CGViewBuilder:
             if feature['type'] == 'CDS':
                 cds_count += 1
 
-        common_genetic_code = max(codes, key=codes.get)
-        print(f"Most Common Genetic Code: {common_genetic_code} (Count: {codes[common_genetic_code]}/{cds_count} CDS)")
+        self.common_genetic_code = max(codes, key=codes.get)
+        # print(f"Most Common Genetic Code: {self.common_genetic_code} (Count: {codes[self.common_genetic_code]}/{cds_count} CDS)")
 
         for feature in self.features:
-            if feature.get('geneticCode') == common_genetic_code:
+            if feature.get('geneticCode') == self.common_genetic_code:
                 del feature['geneticCode']
 
     def build_cgview(self):
-        print("Creating CGView JSON")
-        if self.debug:
-            self.cgview['sequence']['seq'] = "SEQUENCE WOULD GO HERE"
-            self.cgview['features'] += self.features[1:6]
-        else:
-            self.cgview['sequence']['contigs'] = self.contigs
-            self.cgview['features'] += self.features
+        # print("Creating CGView JSON")
+        self.cgview['sequence']['contigs'] = self.contigs
+        self.cgview['features'] += self.features
 
         self.cgview['tracks'] = self.tracks + self.cgview['tracks']
 
@@ -354,10 +374,16 @@ def fixname(filename):
 def index():
     return render_template('index.html')
 
+@app.route("/uploads/<dataset>/<config>", methods=['GET', 'POST'])
 @app.route("/uploads/<dataset>", methods=['GET', 'POST'])
-def result(dataset):
+def result(dataset, config=None):
+    if config is not None:
+        config_path = 'templates/uploads/' + config
+    else:
+        config_path = None
+
     cgview_options = {
-        'config': None,
+        'config': config_path,
         'map_id': int.from_bytes(os.urandom(4), byteorder="big"),
         'map_name': "coba",
         'contigs': None,
@@ -365,14 +391,22 @@ def result(dataset):
     data = CGViewBuilder("templates/uploads/" + dataset, options=cgview_options)
     return render_template("result.html", data=data.to_json())
 
-@app.route("/upload", methods=['GET', 'POST'])
+@app.route("/upload", methods=['POST'])
 def upload():
-    uploaded_file = request.files['file']
-    if uploaded_file:
-        filename = fixname(uploaded_file.filename)
-        file_path = 'templates/uploads/' + filename
-        uploaded_file.save(file_path)
-        return redirect(url_for('result', dataset=filename))
+    dataset_file = request.files.get('dataset')
+    config_file = request.files.get('config')
+    config_name = None
+    config_path = None
+    if config_file is not None:
+        config_name = fixname(config_file.filename)
+        config_path = 'templates/uploads/' + config_name
+        config_file.save(config_path)
+
+    if dataset_file:
+        dataset_name = fixname(dataset_file.filename)
+        dataset_path = 'templates/uploads/' + dataset_name
+        dataset_file.save(dataset_path)
+        return redirect(url_for('result', dataset=dataset_name, config=config_name))
     else:
         return "No file uploaded."
             
