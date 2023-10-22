@@ -26,9 +26,13 @@ localhost:5000
 ```
 
 ### Upload genome dataset file
-Accepted Filetype:
+Supported Filetype:
 * genbank
 * embl
 * fasta
 * raw
 
+### Upload config file (optional)
+Config file is written in yaml
+
+See The Official Config File Example [here](https://github.com/stothard-group/cgview-builder/blob/master/config_example.yml)
