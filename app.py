@@ -58,8 +58,7 @@ class CGViewBuilder:
         }
 
     def read_sequence(self, path):
-        # Determine Sequence file type
-        self.seq_type = "genbank"
+        self.seq_type = self.detect_filetype(path)
 
         # Extract sequence
         sequence_num = 0
@@ -344,10 +343,12 @@ class CGViewBuilder:
         return (score - min_score) / (max_score - min_score)
 
 
-def loadjson(file_path):
-    with open(file_path, "r") as json_file:
-        data = json.load(json_file)
-    return data
+def fixname(filename):
+    name, ext = os.path.splitext(filename)
+    random_number = str(int.from_bytes(os.urandom(10), byteorder="big"))
+    new_filename = f"{name}{random_number}{ext}"
+
+    return new_filename
 
 @app.route('/')
 def index():
@@ -368,9 +369,10 @@ def result(dataset):
 def upload():
     uploaded_file = request.files['file']
     if uploaded_file:
-        file_path = 'templates/uploads/' + uploaded_file.filename
+        filename = fixname(uploaded_file.filename)
+        file_path = 'templates/uploads/' + filename
         uploaded_file.save(file_path)
-        return redirect(url_for('result', dataset=uploaded_file.filename))
+        return redirect(url_for('result', dataset=filename))
     else:
         return "No file uploaded."
             
