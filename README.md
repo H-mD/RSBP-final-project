@@ -11,6 +11,7 @@
 ```
 pip install biopython
 pip install flask
+pip install pyyaml
 ```
 
 ## How to Use
