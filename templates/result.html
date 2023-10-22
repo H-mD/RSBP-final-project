@@ -2,31 +2,29 @@
 <html>
 <head>
     <title>Genome Visualization</title>
-    <style>
-        div#cgviewDiv {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100vh;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/controls.css') }}">
 </head>
 <body>
-    <h1>tes</h1>
     <div id="cgviewDiv"></div>
-     <!-- Javscript -->
-    <!-- Source D3 before CGView -->
+    <div class="cgv-controls">
+        <div class="cgv-btn" id="btn-reset" title="Reset Map"></div>
+        <div class="cgv-btn" id="btn-zoom-in" title="Zoom In"></div>
+        <div class="cgv-btn" id="btn-zoom-out" title="Zoom Out"></div>
+        <div class="cgv-btn" id="btn-move-left" title="Move Left/Counterclockwise"></div>
+        <div class="cgv-btn" id="btn-move-right" title="Move Right/Clockwise"></div>
+        <div class="cgv-btn" id="btn-toggle-format" title="Toggle Linear/Circular Format"></div>
+        <div class="cgv-btn" id="btn-invert-colors" title="Invert Map Colors"></div>
+        <div class="cgv-btn" id="btn-random-feature" title="Move to Random Feature"></div>
+        <div class="cgv-btn" id="btn-download" title="Download Map PNG"></div>
+        <div class="cgv-btn" id="btn-toggle-labels" title="Toggle Labels"></div>
+        <div class="cgv-btn" id="btn-animate" title="Start/Stop Animation"></div>
+    </div>
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/cgview/dist/cgview.min.js"></script>
-    <!-- CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cgview/dist/cgview.css">
     <script>
-            cgv = new CGV.Viewer('#cgviewDiv', {
-                height:600,
-                width: 1500
-            });
-            cgv.io.loadJSON({{ data | tojson | safe}});
-            cgv.draw()
+        var jsonData = {{ data | tojson | safe }};
     </script>
+    <script src="{{ url_for('static', filename='js/controls.js') }}"></script>
 </body>
 </html>
