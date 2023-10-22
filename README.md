@@ -26,5 +26,9 @@ localhost:5000
 ```
 
 ### Upload genome dataset file
-*Curently only accepting .gb file*
+Accepted Filetype:
+* genbank
+* embl
+* fasta
+* raw
 
