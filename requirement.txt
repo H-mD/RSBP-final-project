@@ -1,0 +1,8 @@
+sudo apt install mysql-client -y
+sudo apt install mysql-server -y
+pip install biopython
+pip install flask
+pip install pyyaml
+sudo apt update
+sudo apt install libmysqlclient-dev pkg-config
+pip install flask-mysqldb
