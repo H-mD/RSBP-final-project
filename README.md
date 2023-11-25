@@ -7,11 +7,9 @@
 * Flask.py
 * CGVIEW.js
 
-## Package Requiremnets
+## Install Requirements
 ```
-pip install biopython
-pip install flask
-pip install pyyaml
+pip install -r requirements.txt
 ```
 
 ## How to Use
