@@ -1,5 +1,4 @@
-# from Bio import SeqIO
-from flask import Flask, render_template, request, redirect, make_response
+from flask import Flask, render_template, request
 from CGViewBuilder import CGViewBuilder
 import os
 
