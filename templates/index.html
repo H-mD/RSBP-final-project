@@ -1,16 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>File Upload</title>
+    <title>TOOLS</title>
 </head>
 <body>
-    <h1>UPLOAD YOUR FILES</h1>
-    <form action="/upload" method="POST" enctype="multipart/form-data">
-        <label for="dataset">Dataset File: </label><br>
-        <input type="file" name="dataset" id="dataset"><br><br>
-        <label for="config">Config File (optional): </label><br>
-        <input type="file" name="config" id="config"><br><br>
-        <input type="submit" value="Upload">
+    <h1>Choose</h1>
+    <form id="uploadForm">
+        <button onclick="handleFile('diagram')">Submit Diagram</button>
+        <button onclick="handleFile('prediction')">Submit Prediction</button>
     </form>
+
+    <script>
+        function handleFile(fileType) {
+            var form = document.getElementById('uploadForm');
+            if (fileType === 'diagram') {
+                form.action = '/diagram-form';
+            } else if (fileType === 'prediction') {
+                form.action = '/prediction-form';
+            }
+            form.submit();
+        }
+    </script>
 </body>
 </html>

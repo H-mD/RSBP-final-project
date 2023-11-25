@@ -2,7 +2,7 @@ import joblib
 import pandas as pd
 from sklearn.metrics import accuracy_score, f1_score, precision_score, recall_score
 
-filename = "./test/dog.txt"
+filename = "./test-file/dog.txt"
 
 def Kmers_funct(seq, size=6):
     return [seq[x:x+size].lower() for x in range(len(seq) - size + 1)]
