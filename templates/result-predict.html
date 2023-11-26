@@ -7,5 +7,13 @@
 </head>
 <body>
     <h1>this is dump</h1>
+    <div class="crosstabDiv">
+        {{ matrics | safe }}
+    </div>
+    {% for string in result %}
+        <div>
+            {{ string | safe }}
+        </div>
+    {% endfor %}
 </body>
 </html>
