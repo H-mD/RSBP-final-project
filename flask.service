@@ -1,0 +1,11 @@
+[Unit]
+Description=Gunicorn instance to serve Flask
+After=network.target
+[Service]
+User=root
+Group=www-data
+WorkingDirectory=/root/RSBP-final-project
+Environment="PATH=/root/RSBP-final-project/venv/bin"
+ExecStart=/root/RSBP-final-project/venv/bin/gunicorn --bind 0.0.0.0:5000 wsgi:app
+[Install]
+WantedBy=multi-user.target
