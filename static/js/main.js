@@ -46,53 +46,53 @@ $(document).ready(function(){
 
 
     //contact form validation
-    $("#contact-form").validate({
-        rules: {
-            name: {
-                required: true,
-                minlength: 2
-            },
-            message: {
-                required: true,
-                minlength: 2
-            },
-            email: {
-                required: true,
-                email: true
-            }
-        },
-        messages: {
-            name: {
-                required: "Please enter Your Name",
-                minlength: "Your name must consist of at least 2 characters"
-            },
-            message: {
-                required: "Please Write Something",
-                minlength: "Your message must consist of at least 2 characters"
-            },
-            email: "Please enter a valid email address"
-        },
-        submitHandler: function(form) {
-            $(form).ajaxSubmit({
-                type:"POST",
-                data: $(form).serialize(),
-                url:"mail.php",
-                success: function() {
-                    $('#contact-form :input').attr('disabled', 'disabled');
-                    $('#contact-form').fadeTo( "slow", 0.15, function() {
-                        $(this).find(':input').attr('disabled', 'disabled');
-                        $(this).find('label').css('cursor','default');
-                        $('#success').fadeIn();
-                    });
-                },
-                error: function() {
-                    $('#contact-form').fadeTo( "slow", 0.15, function() {
-                        $('#error').fadeIn();
-                    });
-                }
-            });
-        }
-    });
+    // $("#contact-form").validate({
+    //     rules: {
+    //         name: {
+    //             required: true,
+    //             minlength: 2
+    //         },
+    //         message: {
+    //             required: true,
+    //             minlength: 2
+    //         },
+    //         email: {
+    //             required: true,
+    //             email: true
+    //         }
+    //     },
+    //     messages: {
+    //         name: {
+    //             required: "Please enter Your Name",
+    //             minlength: "Your name must consist of at least 2 characters"
+    //         },
+    //         message: {
+    //             required: "Please Write Something",
+    //             minlength: "Your message must consist of at least 2 characters"
+    //         },
+    //         email: "Please enter a valid email address"
+    //     },
+    //     submitHandler: function(form) {
+    //         $(form).ajaxSubmit({
+    //             type:"POST",
+    //             data: $(form).serialize(),
+    //             url:"mail.php",
+    //             success: function() {
+    //                 $('#contact-form :input').attr('disabled', 'disabled');
+    //                 $('#contact-form').fadeTo( "slow", 0.15, function() {
+    //                     $(this).find(':input').attr('disabled', 'disabled');
+    //                     $(this).find('label').css('cursor','default');
+    //                     $('#success').fadeIn();
+    //                 });
+    //             },
+    //             error: function() {
+    //                 $('#contact-form').fadeTo( "slow", 0.15, function() {
+    //                     $('#error').fadeIn();
+    //                 });
+    //             }
+    //         });
+    //     }
+    // });
 
 });
 
@@ -123,10 +123,10 @@ function init() {
     var map = new google.maps.Map(mapElement, mapOptions);
 
     // Let's also add a marker while we're at it
-    var marker = new google.maps.Marker({
-        position: new google.maps.LatLng(23.751945, 90.384590),
-        map: map,
-        icon: 'img/map.png',
-        title: 'Twing!'
-    });
+    // var marker = new google.maps.Marker({
+    //     position: new google.maps.LatLng(23.751945, 90.384590),
+    //     map: map,
+    //     icon: 'img/map.png',
+    //     title: 'Twing!'
+    // });
 }
