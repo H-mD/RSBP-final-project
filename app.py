@@ -50,9 +50,9 @@ def prediction_upload():
         
         os.remove(dataset_file.filename)
 
-        matrics, result = data.get_result()
+        result, matrics = data.get_result()
         
-        return render_template('result-predict.html', matrics=matrics, result=result)
+        return render_template('result-predict.html', result=result, matrics=matrics)
     else:
         return "No file uploaded."
 

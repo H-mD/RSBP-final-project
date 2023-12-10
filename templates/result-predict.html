@@ -6,9 +6,8 @@
     <title>prediction</title>
 </head>
 <body>
-    <h1>this is dump</h1>
     <div class="crosstabDiv">
-        {{ matrics | safe }}
+        <img src="data:image/png;base64,{{ matrics }}" alt="Crosstab PNG"> <br>
     </div>
     {% for string in result %}
         <div>
