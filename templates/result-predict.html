@@ -13,7 +13,7 @@
         <div class="matrix">
             <img src="data:image/png;base64,{{ matrics }}" alt="Crosstab PNG"> <br>
         </div class="result">
-        <div>
+        <div class="metrics">
             <h2>Statistics</h2>
             <table border="1">
                 {% for key, value in result.items() %}
@@ -23,6 +23,10 @@
                 </tr>
                 {% endfor %}
             </table>
+        </div>
+        <div class="conclusion">
+            <h2>Conclusion</h2>
+            <p>{{ conclusion }}</p>
         </div>
     </div>
 </body>
