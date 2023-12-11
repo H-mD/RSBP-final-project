@@ -32,9 +32,10 @@ def diagram_upload():
             'contigs': None
         }
         data = CGViewBuilder(dataset_file.filename, options=cgview_options)
+        json = data.to_json()
         
-        os.remove(dataset_file.filename)
-        os.remove(config_file.filename) if config_file else None
+        # os.remove(dataset_file.filename)
+        # os.remove(config_file.filename) if config_file else None
         
         return render_template("result.html", data=data.to_json())
     else:
