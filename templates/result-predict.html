@@ -66,6 +66,29 @@
             <div class="book__page"></div>
         </div>
     </div>
+    <div class="header">
+        <button onclick="location.href='/'">Home</button>
+    </div>
+    <div class="section">
+        <div class="matrix">
+            <img src="data:image/png;base64,{{ matrics }}" alt="Crosstab PNG"> <br>
+        </div class="result">
+        <div class="metrics">
+            <h2>Statistics</h2>
+            <table border="1">
+                {% for key, value in result.items() %}
+                <tr>
+                    <td>{{ key }}</td>
+                    <td>{{ value }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <div class="conclusion">
+            <h2>Conclusion</h2>
+            <p>{{ conclusion }}</p>
+        </div>
+    </div>
     {% include 'navbar.html' %}
     <section id="hero-area" style="padding: 10px;">
         <div class="container">

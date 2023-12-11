@@ -58,14 +58,23 @@ class Predict:
         precision = precision_score(self.y_data, self.y_pred, average='weighted')
         recall = recall_score(self.y_data, self.y_pred, average='weighted')
         f1 = f1_score(self.y_data, self.y_pred, average='weighted')
-        return accuracy, precision, recall, f1
+        true_pred = sum(1 for actual, pred in zip(self.y_data, self.y_pred) if actual == pred)
+        return accuracy, precision, recall, f1, true_pred
+    
+    def get_conclusion(self, true_pred, accuracy):
+        if accuracy > 0.95:
+            kekerabatan = 'dekat'
+        else:
+            kekerabatan = 'jauh'
+        conclusion = f"Dari hasil confusion matrix yang diperoleh, prediksi benar sebanyak {true_pred} sequence-class yang ditunjukkan oleh cell berwarna pada confusion matrix, sehingga didapatkan akurasi {accuracy*100}% yang dapat diartikan bahwa input data-test memiliki kekerabatan yang {kekerabatan} dengan data-training yang digunakan."
+        return conclusion
 
     def get_result(self):
         result = {}
-        accuracy, precision, recall, f1 = self.get_metrics()
+        accuracy, precision, recall, f1, true_pred = self.get_metrics()
         result['accuracy'] = round(accuracy, 4)
         result['precision'] = round(precision, 4)
         result['recall'] = round(recall, 4)
         result['f1'] = round(f1, 4)
         
-        return result, self.get_matrix()
+        return result, self.get_matrix(), self.get_conclusion(true_pred, result['accuracy'])
