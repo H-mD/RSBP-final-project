@@ -61,11 +61,11 @@ class Predict:
         return accuracy, precision, recall, f1
 
     def get_result(self):
-        result = []
+        result = {}
         accuracy, precision, recall, f1 = self.get_metrics()
-        result.append("accuracy = %.3f" % (accuracy))
-        result.append("precision = %.3f" % (precision))
-        result.append("recall = %.3f" % (recall))
-        result.append("f1 = %.3f" % (f1))
+        result['accuracy'] = round(accuracy, 4)
+        result['precision'] = round(precision, 4)
+        result['recall'] = round(recall, 4)
+        result['f1'] = round(f1, 4)
         
         return result, self.get_matrix()

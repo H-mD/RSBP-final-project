@@ -6,16 +6,24 @@
     <title>prediction</title>
 </head>
 <body>
-    <div>
+    <div class="header">
         <button onclick="location.href='/'">Home</button>
     </div>
-    <div class="crosstabDiv">
-        <img src="data:image/png;base64,{{ matrics }}" alt="Crosstab PNG"> <br>
-    </div>
-    {% for string in result %}
+    <div class="section">
+        <div class="matrix">
+            <img src="data:image/png;base64,{{ matrics }}" alt="Crosstab PNG"> <br>
+        </div class="result">
         <div>
-            {{ string | safe }}
+            <h2>Statistics</h2>
+            <table border="1">
+                {% for key, value in result.items() %}
+                <tr>
+                    <td>{{ key }}</td>
+                    <td>{{ value }}</td>
+                </tr>
+                {% endfor %}
+            </table>
         </div>
-    {% endfor %}
+    </div>
 </body>
 </html>
