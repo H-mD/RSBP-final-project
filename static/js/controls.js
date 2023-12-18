@@ -3,7 +3,7 @@ var cgv;
 document.addEventListener("DOMContentLoaded", function() {
     cgv = new CGV.Viewer('#cgviewDiv', {
         height:600,
-        width: 1500
+        width: 1150
     });
     cgv.io.loadJSON(jsonData);
     cgv.draw();

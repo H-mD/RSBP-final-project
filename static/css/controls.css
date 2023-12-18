@@ -9,6 +9,8 @@
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+  margin-top: 90px;
+  width: 1200px;
 }
   
 .cgv-btn {
