@@ -1,27 +1,60 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Genome Visualization</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/controls.css') }}">
+    <!-- Fonts -->
+    <!-- Lato -->
+    <link href="http://fonts.googleapis.com/css?family=Lato:400,300,700" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+
+    <!-- CSS -->
+
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../static/css/owl.carousel.css">
+    <link rel="stylesheet" href="../static/css/animate.css">
+    <link rel="stylesheet" href="../static/css/main.css">
+    <!-- Responsive Stylesheet -->
+    <link rel="stylesheet" href="../static/css/responsive.css">
 </head>
+
 <body>
-    <div>
-        <button onclick="location.href='/'">Home</button>
+    <div id="preloader">
+        <div class="book">
+            <div class="book__page"></div>
+            <div class="book__page"></div>
+            <div class="book__page"></div>
+        </div>
     </div>
-    <div id="cgviewDiv"></div>
-    <div class="cgv-controls">
-        <div class="cgv-btn" id="btn-reset" title="Reset Map"></div>
-        <div class="cgv-btn" id="btn-zoom-in" title="Zoom In"></div>
-        <div class="cgv-btn" id="btn-zoom-out" title="Zoom Out"></div>
-        <div class="cgv-btn" id="btn-move-left" title="Move Left/Counterclockwise"></div>
-        <div class="cgv-btn" id="btn-move-right" title="Move Right/Clockwise"></div>
-        <div class="cgv-btn" id="btn-toggle-format" title="Toggle Linear/Circular Format"></div>
-        <div class="cgv-btn" id="btn-invert-colors" title="Invert Map Colors"></div>
-        <div class="cgv-btn" id="btn-random-feature" title="Move to Random Feature"></div>
-        <div class="cgv-btn" id="btn-download" title="Download Map PNG"></div>
-        <div class="cgv-btn" id="btn-toggle-labels" title="Toggle Labels"></div>
-        <div class="cgv-btn" id="btn-animate" title="Start/Stop Animation"></div>
-    </div>
+
+    {% include 'navbar.html' %}
+    <section id="hero-area" style="padding-top: 120px;margin-left: -15px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 wow zoomIn">
+                    <div id="cgviewDiv"></div>
+                    <div class="cgv-controls">
+                        <div class="cgv-btn" id="btn-reset" title="Reset Map"></div>
+                        <div class="cgv-btn" id="btn-zoom-in" title="Zoom In"></div>
+                        <div class="cgv-btn" id="btn-zoom-out" title="Zoom Out"></div>
+                        <div class="cgv-btn" id="btn-move-left" title="Move Left/Counterclockwise"></div>
+                        <div class="cgv-btn" id="btn-move-right" title="Move Right/Clockwise"></div>
+                        <div class="cgv-btn" id="btn-toggle-format" title="Toggle Linear/Circular Format"></div>
+                        <div class="cgv-btn" id="btn-invert-colors" title="Invert Map Colors"></div>
+                        <div class="cgv-btn" id="btn-random-feature" title="Move to Random Feature"></div>
+                        <div class="cgv-btn" id="btn-download" title="Download Map PNG"></div>
+                        <div class="cgv-btn" id="btn-toggle-labels" title="Toggle Labels"></div>
+                        <div class="cgv-btn" id="btn-animate" title="Start/Stop Animation"></div>
+                    </div>
+                </div>
+            </div><!-- .row close -->
+            <button class="btn btn-default btn-home" onclick="location.href='/'">Home</button>
+            <button class="btn btn-default btn-home" onclick="location.href='/diagram-form'">Back</button>
+        </div><!-- .container close -->
+    </section><!-- header close -->
+    
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/cgview/dist/cgview.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cgview/dist/cgview.css">
@@ -29,5 +62,18 @@
         var jsonData = {{ data | tojson | safe }};
     </script>
     <script src="{{ url_for('static', filename='js/controls.js') }}"></script>
+    <!-- Js -->
+    <script src="../static/js/vendor/modernizr-2.6.2.min.js"></script>
+    <script src="../static/js/vendor/jquery-1.10.2.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    <script src="../static/js/jquery.lwtCountdown-1.0.js"></script>
+    <script src="../static/js/bootstrap.min.js"></script>
+    <script src="../static/js/owl.carousel.min.js"></script>
+    <script src="../static/js/jquery.nav.js"></script>
+    <script src="../static/js/jquery.sticky.js"></script>
+    <script src="../static/js/plugins.js"></script>
+    <script src="../static/js/wow.min.js"></script>
+    <script src="../static/js/main.js"></script>
 </body>
+
 </html>

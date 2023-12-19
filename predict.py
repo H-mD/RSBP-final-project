@@ -66,7 +66,7 @@ class Predict:
             kekerabatan = 'dekat'
         else:
             kekerabatan = 'jauh'
-        conclusion = f"Dari hasil confusion matrix yang diperoleh, prediksi benar sebanyak {true_pred} sequence-class yang ditunjukkan oleh cell berwarna pada confusion matrix, sehingga didapatkan akurasi {accuracy*100}% yang dapat diartikan bahwa input data-test memiliki kekerabatan yang {kekerabatan} dengan data-training yang digunakan."
+        conclusion = f"Dari hasil confusion matrix yang diperoleh, prediksi benar sebanyak {true_pred} sequence-class yang ditunjukkan oleh cell berwarna pada confusion matrix, sehingga didapatkan akurasi {round(accuracy*100, 2)}% yang dapat diartikan bahwa input data-test memiliki kekerabatan yang {kekerabatan} dengan data-training yang digunakan."
         return conclusion
 
     def get_result(self):
