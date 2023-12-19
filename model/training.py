@@ -23,7 +23,7 @@ X = cv.fit_transform(human_texts)
 
 X_train, X_test, y_train, y_test = train_test_split(X, y_human, test_size = 0.20, random_state=42)
 
-classifier = MultinomialNB(alpha=0.16)
+classifier = MultinomialNB(alpha=0.19)
 classifier.fit(X_train, y_train)
 
 joblib.dump(cv, './model/cv.joblib')
